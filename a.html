@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboRoots | Machine-Rolled Cones Since 2018</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Enhanced Color Variables */
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --green: #2D5547; /* Pantone 7479C */
+            --green-light: #4D8A72; /* Lightened green */
+            --yellow: #FFE900; /* Pantone 803C */
+            --red: #FF4F58; /* Pantone 1788C */
+            --blue: #00B0D7; /* Pantone 306C */
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Arial Narrow', sans-serif;
+        }
+        
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid var(--green-light);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white);
+            position: relative;
+        }
+        
+        .logo span {
+            color: var(--green-light);
+        }
+        
+        .logo:after {
+            content: "Since 2018";
+            position: absolute;
+            font-size: 12px;
+            bottom: -8px;
+            right: 0;
+            color: var(--yellow);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--green-light);
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            background-color: rgba(45, 85, 71, 0.5);
+            padding: 15px;
+            border-left: 3px solid var(--yellow);
+        }
+        
+        .hero-image {
+            max-width: 600px;
+            margin: 40px auto 0;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+        
+        .btn-primary {
+            background-color: var(--green-light);
+            color: var(--black);
+            font-weight: 700;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 233, 0, 0.4);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--black);
+            border-top: 1px solid var(--green-light);
+            border-bottom: 1px solid var(--green-light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--green-light);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--yellow);
+            margin: 15px auto 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: rgba(45, 85, 71, 0.2);
+            border: 1px solid var(--green-light);
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(45, 85, 71, 0.3);
+            border-color: var(--yellow);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--yellow);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 100px 0;
+            background-color: var(--black);
+        }
+        
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        .product-image {
+            position: relative;
+            animation: pulse 3s ease infinite;
+        }
+        
+        .product-image img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid var(--green-light);
+        }
+        
+        .product-options {
+            background-color: rgba(45, 85, 71, 0.2);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--green-light);
+        }
+        
+        .product-options h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--yellow);
+        }
+        
+        .option-group {
+            margin-bottom: 20px;
+        }
+        
+        .option-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--green-light);
+            font-weight: 600;
+        }
+        
+        .option-group select, .option-group input {
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid var(--green-light);
+            color: var(--white);
+            border-radius: 4px;
+        }
+        
+        .build-btn {
+            background-color: var(--yellow);
+            color: var(--black);
+            width: 100%;
+            font-weight: 700;
+            margin-top: 20px;
+            animation: pulse 2s ease infinite;
+        }
+        
+        .build-btn:hover {
+            background-color: var(--green-light);
+            color: var(--white);
+            animation: none;
+        }
+        
+        /* Distributor Section */
+        .distributor {
+            padding: 80px 0;
+            background-color: rgba(45, 85, 71, 0.2);
+            text-align: center;
+            border-top: 1px solid var(--green-light);
+            border-bottom: 1px solid var(--green-light);
+        }
+        
+        .distributor h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--yellow);
+        }
+        
+        .distributor p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+        }
+        
+        .distributor-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .distributor-logo {
+            background-color: var(--black);
+            padding: 20px 30px;
+            border-radius: 8px;
+            border: 1px solid var(--green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .distributor-logo img {
+            max-height: 50px;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .distributor-logo:hover img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #000;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--green-light);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--yellow);
+        }
+        
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .product-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-options {
+                padding: 20px;
+            }
+            
+            .distributor-logos {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">ROBO<span>ROOTS</span></div>
+            <nav>
+                <a href="#" class="btn btn-primary">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="animate">Precision Machine-Rolled Cones</h1>
+            <p class="animate delay-1">Offering machine-rolled cones since 2018 - Industrial precision meets perfect smoking experience</p>
+            <div class="hero-image animate delay-2">
+                <img src="https://cdn.prod.website-files.com/5e3857a567120199b60452bb/66f56fe73752fe3112f77006_All%20cones%201.png" alt="RoboRoots Cones">
+            </div>
+            <a href="#build" class="btn btn-primary animate delay-3">Build Your Cone</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title animate">Engineered for Excellence</h2>
+            <div class="features-grid">
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Aerospace Precision</h3>
+                    <p>Our CNC machines produce cones with ±0.01mm tolerance for perfect consistency every time.</p>
+                </div>
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>ISO-Certified Facility</h3>
+                    <p>Manufactured in our ISO 9001 certified clean room for pharmaceutical-grade quality.</p>
+                </div>
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Custom Solutions</h3>
+                    <p>From diameter to paper weight - we engineer to your exact specifications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="build">
+        <div class="container">
+            <h2 class="section-title animate">Build Your Perfect Cone</h2>
+            <div class="product-showcase">
+                <div class="product-image animate">
+                    <img src="https://cdn.prod.website-files.com/5e3857a567120199b60452bb/66f56fe73752fe3112f77006_All%20cones%201.png" alt="RoboRoots Cones">
+                </div>
+                <div class="product-options animate delay-1">
+                    <h3>Custom Cone Builder</h3>
+                    <div class="option-group">
+                        <label for="size">Cone Size</label>
+                        <select id="size">
+                            <option>1 1/4 Size (1.25g capacity)</option>
+                            <option>King Size (2.5g capacity)</option>
+                            <option>Custom Length</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="material">Paper Material</label>
+                        <select id="material">
+                            <option>Ultra Thin Rice Paper</option>
+                            <option>Hemp Paper</option>
+                            <option>Flax Paper</option>
+                            <option>Custom Blend</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="filter">Filter Type</label>
+                        <select id="filter">
+                            <option>Standard Cardboard</option>
+                            <option>Crutchless</option>
+                            <option>Custom Printed</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="quantity">Quantity (boxes of 50)</label>
+                        <input type="number" id="quantity" min="1" value="1">
+                    </div>
+                    <button class="btn build-btn">Build Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Distributor Section -->
+    <section class="distributor">
+        <div class="container">
+            <h2 class="animate">Your Premier Pre-Rolled Cone Distributor</h2>
+            <p class="animate delay-1">Trusted by leading brands and dispensaries across North America for consistent, high-quality machine-rolled cones.</p>
+            <div class="distributor-logos">
+                <div class="distributor-logo animate">
+                    <img src="https://via.placeholder.com/150x50?text=Dispensary+1" alt="Dispensary Logo">
+                </div>
+                <div class="distributor-logo animate delay-1">
+                    <img src="https://via.placeholder.com/150x50?text=Dispensary+2" alt="Dispensary Logo">
+                </div>
+                <div class="distributor-logo animate delay-2">
+                    <img src="https://via.placeholder.com/150x50?text=Dispensary+3" alt="Dispensary Logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo animate">ROBO<span>ROOTS</span></div>
+            <div class="footer-links">
+                <a href="#" class="animate">Products</a>
+                <a href="#" class="animate delay-1">Technology</a>
+                <a href="#" class="animate delay-1">About</a>
+                <a href="#" class="animate delay-2">Contact</a>
+                <a href="#" class="animate delay-2">Wholesale</a>
+            </div>
+            <p class="copyright animate delay-3">© 2023 RoboRoots. Machine-Rolled Cones Since 2018.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation trigger on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(element => {
+                element.style.opacity = 0;
+                observer.observe(element);
+            });
+            
+            // Simple form interaction
+            const buildBtn = document.querySelector('.build-btn');
+            if (buildBtn) {
+                buildBtn.addEventListener('click', function() {
+                    this.textContent = 'Building Your Custom Cones...';
+                    setTimeout(() => {
+                        this.textContent = 'Order Submitted!';
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
